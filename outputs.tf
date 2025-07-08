@@ -4,6 +4,6 @@ output "vpc_id" {
 }
 
 output "aws_subnet_private_ids" {
-  description = "Private Subnets"
-  value = aws_subnet.private[*].id
+  description = "Private Subnets IDs"
+  value = [for subnet in aws_subnet.private : subnet.id if contains(keys(subnet), "id") ]
 }
