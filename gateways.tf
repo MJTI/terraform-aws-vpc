@@ -3,7 +3,7 @@ resource "aws_eip" "nat-eip" {
 }
 
 resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.this
+  vpc_id = aws_vpc.this.id
 
   tags = {
     Name       = "${var.project}-igw"
