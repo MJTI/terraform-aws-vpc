@@ -1,0 +1,18 @@
+name: CI terraform VPC module
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: checkout code
+      uses: action/checkout@v4
+
+    - name: run simple command
+      run: whoami && pws && ls -lha
+
+    - name: run simple command
+      run: terraform --version
