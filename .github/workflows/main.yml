@@ -1,0 +1,34 @@
+name: CI Terraform VPC Moudle
+
+on:
+  workflow_dispatch:
+
+env:
+  AWS_REGION: "us-east-1"
+
+jobs:
+  test_terraform_module:
+    runs-on: ubuntu-24.04
+    permissions:
+      id-token: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS with OIDC
+        uses: aws-actions/configure-aws-credentials@v4.1.0
+        with:
+          role-to-assume: "arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/terraform-githubaction"
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: install terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: "1.12.2"
+
+      - name: Check Terraform Version
+        run: terraform --version
+
+      - name: Fetch The Caller Identity
+        run: aws sts get-caller-identity
