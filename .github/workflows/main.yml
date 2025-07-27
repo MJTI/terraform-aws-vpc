@@ -12,7 +12,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: run simple command
-      run: whoami && pws && ls -lha
+      run: whoami && pwd && ls -lha
 
     - name: run simple command
       run: terraform --version
