@@ -1,4 +1,4 @@
-name: CI Terraform EKS Module
+name: CI Terraform VPC Moudle
 
 on:
   workflow_dispatch:
@@ -38,4 +38,4 @@ jobs:
         run: terraform validate
 
       - name: Planning Terrafom
-        run: terraform plan -var-file=fake-values.yaml -no-color
+        run: terraform plan -var-files=fake-values.yaml -no-color
