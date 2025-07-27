@@ -30,5 +30,15 @@ jobs:
       - name: Check Terraform Version
         run: terraform --version
 
-      - name: Fetch The Caller Identity
-        run: aws sts get-caller-identity
+      - name: Terraform init
+        run: terraform init
+
+      - name: Checking The Formatting Of The .tf Files
+        run: terraform fmt -check
+        continue-on-error: true
+
+      - name: Validating Terraform files
+        run: terraform validate
+
+      - name: Planning Terrafom
+        run: terraform plan -var-files=fake-values.yaml -no-color
