@@ -1,4 +1,4 @@
-name: CI Terraform VPC Moudle
+name: CI Terraform VPC Module
 
 on:
   workflow_dispatch:
@@ -17,7 +17,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4.1.0
         with:
           role-to-assume: "arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/terraform-githubaction"
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region: ${{ vars.AWS_REGION }}
 
       - name: install terraform
         uses: hashicorp/setup-terraform@v3.1.2
@@ -38,4 +38,4 @@ jobs:
         run: terraform validate
 
       - name: Planning Terrafom
-        run: terraform plan -var-files=fake-values.yaml -no-color
+        run: terraform plan -var-file=fake-values.yaml -no-color
