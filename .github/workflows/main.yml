@@ -48,7 +48,3 @@ jobs:
       - name: Planning Terrafom
         id: plan
         run: terraform plan -var-file=fake-values.yaml -no-color
-
-      - name: Terraform Plan Status
-        if: steps.plan.outcome == 'failure'
-        run: exit 1
